@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }@inputs:
+{ config, lib, pkgs, dotfiles, ... }@inputs:
 
 {
   imports =
@@ -82,20 +82,17 @@ time.timeZone = "America/Chicago";
      ];
  };
 
-# home-manager = {
-#	# also pass inputs to home manager modules
-#	extraSpecialArgs = { inherit inputs; };
-#	users = {
-#	  "erict" = import ./home.nix;
-#	};
-# };
+#home-manager = {
+## also pass inputs to home manager modules
+#extraSpecialArgs = { inherit inputs; };
+#users = {
+#  "erict" = dotfiles.config.homeConfigurations.erict;
+#  };
+#};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    git
     home-manager
   ];
 
